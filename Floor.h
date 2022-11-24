@@ -6,29 +6,111 @@
 #include <string>
 using namespace std;
 
+const int ROW = 11;
+const int COL = 31;
+
 class Floor
 {
 public:
-    char *create2DArray(ifstream &fin)
+    static char **create2DArray(string name)
     {
-        const int ROW = 11;
-        const int COL = 31;
-        char *floor = new char[ROW][COL];
+
+        ifstream fin;
+        fin.open(name);
+
+        char **floor;
+        floor = new char *[ROW];
+        for (int i = 0; i < ROW; i++)
+        {
+            floor[i] = new char[COL];
+        }
+
         int row = 0;
         int col = 0;
         string temp;
         while (getline(fin, temp))
         {
 
-            for (int i = 0; i < 31; i++)
+            for (col = 0; col < 31; col++)
             {
-                floor[row][i] = temp.at(i);
+                floor[row][col] = temp.at(col);
             }
             row++;
         }
         fin.close();
 
         return floor;
+    }
+
+    static void printMap(char **map)
+    {
+        for (int i = 0; i < 11; i++)
+        {
+
+            for (int j = 0; j < 31; j++)
+            {
+                cout << map[i][j];
+            }
+            cout << endl;
+        };
+    }
+
+    static bool checkCollision(char **map, int xTest, int yTest)
+    {
+        // out of map
+        if (xTest < 0 || xTest >= ROW)
+        {
+            return false;
+        }
+        else if (yTest < 0 || yTest >= COL)
+        {
+            return false;
+        }
+        else if (map[xTest][yTest] == '#')
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    static void userInput(char input, char **map, char ch, int &x, int &y)
+    {
+        switch (input)
+        {
+        case 'w':
+            if (checkCollision(map, (x - 1), y))
+            {
+                map[x][y] = ' ';
+                map[--x][y] = ch;
+            }
+            break;
+        case 'a':
+            if (checkCollision(map, x, (y - 1)))
+            {
+                map[x][y] = ' ';
+                map[x][--y] = ch;
+            }
+            break;
+        case 's':
+            if (checkCollision(map, (x + 1), y))
+            {
+                map[x][y] = ' ';
+                map[++x][y] = ch;
+            }
+            break;
+        case 'd':
+            if (checkCollision(map, x, (y + 1)))
+            {
+                map[x][y] = ' ';
+                map[x][++y] = ch;
+            }
+            break;
+        default:
+            cout << "Enter valid key" << endl;
+        }
     }
 };
 

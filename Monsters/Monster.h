@@ -2,15 +2,23 @@
 #define MONSTER_H
 
 #include <string>
+#include <iostream>
+#include "../Characters/Character.h"
+#include "../Characters/Ghostbuster.h"
 using namespace std;
 
 class Monster
 {
 public:
-    virtual void getsHit(string weapon);
-    int getLvl();
-    float getHealth();
-    virtual string setName() = 0;
+    // virtual void getsHit(Character *user) = 0;
+    int getLvl()
+    {
+        return level;
+    }
+    float getHealth()
+    {
+        return health;
+    }
     virtual string getName() = 0;
     void updateState();
 

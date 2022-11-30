@@ -2,7 +2,7 @@
 #define GHOST_H
 #include "Monster.h"
 #include "../Characters/Character.h"
-#include "../Characters/Ghostbuster.h"
+// #include "../Characters/GBuster.h"
 
 class Ghost : public Monster
 {
@@ -11,6 +11,7 @@ public:
     {
         health = h;
         level = l;
+        cout << "Created Ghost obj" << endl;
     }
 
     // void getsHit(Character *user)

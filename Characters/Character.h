@@ -11,19 +11,32 @@ class Character
 {
 
 public:
-    virtual void getsHit(Monster *enemy) = 0;
+    // virtual void getsHit(Monster *enemy) = 0;
+    Character()
+    {
+        name = "Unknown";
+        health = 0.0;
+        xp = 0.0;
+        level = 1;
+    }
     int getLvl()
     {
         return level;
-    };
+    }
     float getHealth()
     {
         return health;
-    };
+    }
+
     string getName()
     {
         return name;
     }
+    void setName(string str)
+    {
+        name = str;
+    }
+
     virtual string getWeapon() = 0;
     void saveData();
     void loadData();

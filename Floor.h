@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 using namespace std;
 
 const int ROW = 11;
@@ -12,17 +13,51 @@ const int COL = 31;
 class Floor
 {
 public:
-    static char **create2DArray(string name)
+    // static char **create2DArray(string name)
+    // {
+
+    //     ifstream fin;
+    //     fin.open(name);
+
+    //     char **floor;
+    //     floor = new char *[ROW];
+    //     for (int i = 0; i < ROW; i++)
+    //     {
+    //         floor[i] = new char[COL];
+    //     }
+
+    //     int row = 0;
+    //     int col = 0;
+    //     string temp;
+    //     while (getline(fin, temp))
+    //     {
+
+    //         for (col = 0; col < 31; col++)
+    //         {
+    //             floor[row][col] = temp.at(col);
+    //         }
+    //         row++;
+    //     }
+    //     fin.close();
+
+    //     return floor;
+    //     for (int i = 0; i < ROW; i++)
+    //     {
+    //         delete[] floor[i];
+    //     }
+    //     delete[] floor;
+    // }
+
+    static vector<vector<char>> create2DArray(string name)
     {
 
         ifstream fin;
         fin.open(name);
 
-        char **floor;
-        floor = new char *[ROW];
+        vector<vector<char>> floor(ROW);
         for (int i = 0; i < ROW; i++)
         {
-            floor[i] = new char[COL];
+            floor[i] = vector<char>(COL);
         }
 
         int row = 0;
@@ -42,7 +77,7 @@ public:
         return floor;
     }
 
-    static void printMap(char **map)
+    static void printMap(vector<vector<char>> &map)
     {
         for (int i = 0; i < 11; i++)
         {
@@ -55,7 +90,7 @@ public:
         };
     }
 
-    static bool checkCollision(char **map, int xTest, int yTest)
+    static bool checkCollision(vector<vector<char>> &map, int xTest, int yTest)
     {
         // out of map
         if (xTest < 0 || xTest >= ROW)
@@ -76,7 +111,8 @@ public:
         }
     }
 
-    static void userInput(char input, char **map, char ch, int &x, int &y)
+    // char **map
+    static void userInput(char input, vector<vector<char>> &map, char ch, int &x, int &y)
     {
         switch (input)
         {

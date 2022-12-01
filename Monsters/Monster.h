@@ -4,13 +4,15 @@
 #include <string>
 #include <iostream>
 #include "../Characters/Character.h"
-// #include "../Characters/GBuster.h"
+#include "../Characters/Detective.h"
+
 using namespace std;
 
 class Monster
 {
 public:
     // virtual void getsHit(Character *user) = 0;
+    // virtual void test(Character *user) = 0;
     int getLvl()
     {
         return level;

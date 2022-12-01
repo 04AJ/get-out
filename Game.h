@@ -117,16 +117,31 @@ public:
   // creates new menu for fighting and increases or decreases user character xp/level
   static bool duel(Character *user, Monster *enemy)
   {
-
-    cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << "(You) | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
-    cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
-    int choice = 0;
-    cin >> choice;
-    if (choice == 1)
+    bool endDuel = false;
+    while (!endDuel)
     {
-      // enemy->getsHit(user);
-      // user->getsHit(enemy);
+      cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << "(You) | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+      cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
+      int choice = 0;
+      cin >> choice;
+      if (choice == 1)
+      {
+        // enemy->getsHit(user);
+        user->getsHit(enemy);
+      }
+
+      if (user->getHealth() == 0.0)
+      {
+        endDuel = true;
+        return true;
+      }
+      else if (enemy->getHealth() == 0.0)
+      {
+        endDuel = true;
+        return false;
+      }
     }
+
     return false;
   }
   static bool floor3(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
@@ -140,7 +155,7 @@ public:
     char input;
     cin >> input;
 
-    while ((input != 'q' || input != 'Q') && ((_x != 10) && (_y != 29)))
+    while ((input != 'q' && input != 'Q') && ((_x != 10) && (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
       cout << "x:" << _x << " y:" << _y << endl;
@@ -158,6 +173,10 @@ public:
           {
             cout << "You have died. GAME OVER" << endl;
             return false;
+          }
+          else
+          {
+            cout << "CONGRADULATIONS! You have defeated the monster. You have gained ___ xp" << endl;
           }
         }
         else if (d == 2)
@@ -188,7 +207,7 @@ public:
     cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
     char input;
     cin >> input;
-    while ((input != 'q' || input != 'Q') && ((_x != 10) && (_y != 29)))
+    while ((input != 'q' && input != 'Q') && ((_x != 10) && (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
       cout << "x:" << _x << " y:" << _y << endl;

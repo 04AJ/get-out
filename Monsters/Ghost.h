@@ -2,7 +2,7 @@
 #define GHOST_H
 #include "Monster.h"
 #include "../Characters/Character.h"
-// #include "../Characters/GBuster.h"
+#include "../Characters/Detective.h"
 
 class Ghost : public Monster
 {
@@ -19,6 +19,11 @@ public:
     //     health -= (10 * user->getLvl());
     //     cout << user->getName() << " attacked " << name << " with the " << user->getWeapon() << endl;
     //     cout << name << " Health:" << health << endl;
+    // }
+
+    // void test(Character *user)
+    // {
+    //     cout << user->getName() << endl;
     // }
     string getName()
     {

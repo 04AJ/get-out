@@ -3,13 +3,16 @@
 #include <vector>
 #include <fstream>
 
+// NEEDS TO BE ON TOP OTHERWISE PROGRAM WILL CRASH
+#include "Characters/Detective.h"
+#include "Characters/Character.h"
+#include "Monsters/Ghost.h"
+#include "Monsters/Monster.h"
+
+// #include "Characters/GBuster.h"
+
 #include "Floor.h"
 #include "Game.h"
-#include "Characters/Character.h"
-// #include "Characters/GBuster.h"
-#include "Characters/Detective.h"
-#include "Monsters/Monster.h"
-#include "Monsters/Ghost.h"
 
 using namespace std;
 
@@ -21,9 +24,8 @@ int main()
   vector<vector<char>> maze1 = Floor::create2DArray("mazes/maze1.txt");
 
   // CHARACTER POINTER
-  Character *gb = nullptr;
+
   Character *detective = nullptr;
-  Character *vslayer = nullptr;
 
   // OPENING PAGE
   int load = Game::openingMenu();
@@ -87,9 +89,8 @@ int main()
     fin.close();
   }
 
-  delete gb;
   delete detective;
-  delete vslayer;
+
   return 0;
 }
 

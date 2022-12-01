@@ -11,7 +11,7 @@ class Character
 {
 
 public:
-    // virtual void getsHit(Monster *enemy) = 0;
+    virtual void getsHit(Monster *enemy) = 0;
     Character()
     {
         name = "Unknown";
@@ -64,10 +64,7 @@ public:
         cout << "Skipped Duel" << endl;
         cout << "Health: " << health << endl;
     }
-    // virtual int attack(Monster *enemy)
-    // {
-    //     cout << name << " attacked!" << endl;
-    // }
+
     virtual void special() = 0;
 
 protected:

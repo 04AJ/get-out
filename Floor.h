@@ -13,41 +13,6 @@ const int COL = 31;
 class Floor
 {
 public:
-    // static char **create2DArray(string name)
-    // {
-
-    //     ifstream fin;
-    //     fin.open(name);
-
-    //     char **floor;
-    //     floor = new char *[ROW];
-    //     for (int i = 0; i < ROW; i++)
-    //     {
-    //         floor[i] = new char[COL];
-    //     }
-
-    //     int row = 0;
-    //     int col = 0;
-    //     string temp;
-    //     while (getline(fin, temp))
-    //     {
-
-    //         for (col = 0; col < 31; col++)
-    //         {
-    //             floor[row][col] = temp.at(col);
-    //         }
-    //         row++;
-    //     }
-    //     fin.close();
-
-    //     return floor;
-    //     for (int i = 0; i < ROW; i++)
-    //     {
-    //         delete[] floor[i];
-    //     }
-    //     delete[] floor;
-    // }
-
     static vector<vector<char>> create2DArray(string name)
     {
 

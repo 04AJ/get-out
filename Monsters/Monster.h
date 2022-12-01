@@ -1,18 +1,26 @@
 #ifndef MONSTER_H
 #define MONSTER_H
 
-#include <string>
-#include <iostream>
+#include "../Object.h"
 #include "../Characters/Character.h"
 #include "../Characters/Detective.h"
 
+#include <string>
+#include <iostream>
+
 using namespace std;
 
-class Monster
+class Monster : public Object
 {
 public:
-    // virtual void getsHit(Character *user) = 0;
-    // virtual void test(Character *user) = 0;
+    virtual void getsHit(Object *user) = 0;
+
+    Monster()
+    {
+        health = 0.0;
+        level = 1;
+    }
+
     int getLvl()
     {
         return level;

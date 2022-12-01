@@ -1,13 +1,14 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
+#include "../Object.h"
+#include "../Monsters/Monster.h"
 #include <string>
 #include <vector>
-#include "../Monsters/Monster.h"
-#include "../Monsters/Ghost.h"
+
 using namespace std;
 
-class Character
+class Character : public Object
 {
 
 public:
@@ -68,10 +69,9 @@ public:
     virtual void special() = 0;
 
 protected:
-    string name;
     float health;
     float xp;
-    int level;
+
     vector<string> bag;
 };
 

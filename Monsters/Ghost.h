@@ -1,8 +1,7 @@
 #ifndef GHOST_H
 #define GHOST_H
+
 #include "Monster.h"
-#include "../Characters/Character.h"
-#include "../Characters/Detective.h"
 
 class Ghost : public Monster
 {
@@ -14,17 +13,13 @@ public:
         cout << "Created Ghost obj" << endl;
     }
 
-    // void getsHit(Character *user)
-    // {
-    //     health -= (10 * user->getLvl());
-    //     cout << user->getName() << " attacked " << name << " with the " << user->getWeapon() << endl;
-    //     cout << name << " Health:" << health << endl;
-    // }
+    void getsHit(Object *user)
+    {
+        health -= (20 * user->getLvl());
+        cout << user->getName() << " attacked " << name << endl;
+        cout << name << " Health:" << health << endl;
+    }
 
-    // void test(Character *user)
-    // {
-    //     cout << user->getName() << endl;
-    // }
     string getName()
     {
         return name;

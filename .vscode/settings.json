@@ -5,7 +5,9 @@
         "fstream": "cpp",
         "cmath": "cpp",
         "ostream": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "string": "cpp",
+        "vector": "cpp"
     },
     "C_Cpp.errorSquiggles": "Enabled"
 }

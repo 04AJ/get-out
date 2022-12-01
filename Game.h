@@ -2,9 +2,11 @@
 #define GAME_H
 #include <iostream>
 
+#include "Object.h"
 #include "Characters/Character.h"
-// #include "Characters/GBuster.h"
 #include "Characters/Detective.h"
+// #include "Characters/GBuster.h"
+
 #include "Monsters/Monster.h"
 #include "Monsters/Ghost.h"
 
@@ -120,13 +122,54 @@ public:
     bool endDuel = false;
     while (!endDuel)
     {
-      cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << "(You) | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+      cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
       cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
       int choice = 0;
       cin >> choice;
       if (choice == 1)
       {
-        // enemy->getsHit(user);
+        cout << R"(
+          
+  _    _                       _   _             _              
+ | |  | |                     | | | |           | |             
+ | |  | |___  ___ _ __    __ _| |_| |_ __ _  ___| | _____       
+ | |  | / __|/ _ \ '__|  / _` | __| __/ _` |/ __| |/ / __|      
+ | |__| \__ \  __/ |    | (_| | |_| || (_| | (__|   <\__ \_ _ _ 
+  \____/|___/\___|_|     \__,_|\__|\__\__,_|\___|_|\_\___(_|_|_)
+                                                                
+                                                                
+
+        )" << endl;
+        enemy->getsHit(user);
+
+        cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+      }
+
+      if (enemy->getHealth() == 0.0)
+      {
+        endDuel = true;
+        return false;
+      }
+
+      char enter;
+      cout << "Enter 'm' to for the monster's attack";
+      cin >> enter;
+      if (enter == 'm')
+      {
+
+        // Monster attacks
+        cout << R"(
+ 
+  __  __                 _                    _   _             _              
+ |  \/  |               | |                  | | | |           | |             
+ | \  / | ___  _ __  ___| |_ ___ _ __    __ _| |_| |_ __ _  ___| | _____       
+ | |\/| |/ _ \| '_ \/ __| __/ _ \ '__|  / _` | __| __/ _` |/ __| |/ / __|      
+ | |  | | (_) | | | \__ \ ||  __/ |    | (_| | |_| || (_| | (__|   <\__ \_ _ _ 
+ |_|  |_|\___/|_| |_|___/\__\___|_|     \__,_|\__|\__\__,_|\___|_|\_\___(_|_|_)
+                                                                               
+                                                                               
+
+        )" << endl;
         user->getsHit(enemy);
       }
 
@@ -134,11 +177,6 @@ public:
       {
         endDuel = true;
         return true;
-      }
-      else if (enemy->getHealth() == 0.0)
-      {
-        endDuel = true;
-        return false;
       }
     }
 
@@ -177,6 +215,8 @@ public:
           else
           {
             cout << "CONGRADULATIONS! You have defeated the monster. You have gained ___ xp" << endl;
+            Floor::printMap(map);
+            cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
           }
         }
         else if (d == 2)

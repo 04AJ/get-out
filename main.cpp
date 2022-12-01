@@ -1,18 +1,20 @@
+
+#include "Floor.h"
+#include "Object.h"
+// NEEDS TO BE ON TOP OTHERWISE PROGRAM WILL CRASH
+
+#include "Characters/Detective.h"
+#include "Characters/GBuster.h"
+#include "Characters/Character.h"
+#include "Monsters/Monster.h"
+#include "Monsters/Ghost.h"
+
+#include "Game.h"
+
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <fstream>
-
-// NEEDS TO BE ON TOP OTHERWISE PROGRAM WILL CRASH
-#include "Characters/Detective.h"
-#include "Characters/Character.h"
-#include "Monsters/Ghost.h"
-#include "Monsters/Monster.h"
-
-// #include "Characters/GBuster.h"
-
-#include "Floor.h"
-#include "Game.h"
 
 using namespace std;
 
@@ -26,6 +28,7 @@ int main()
   // CHARACTER POINTER
 
   Character *detective = nullptr;
+  Character *ghostbuster = nullptr;
 
   // OPENING PAGE
   int load = Game::openingMenu();
@@ -51,6 +54,7 @@ int main()
     if (charType == 1)
     {
       myChar = 'G';
+      ghostbuster = new GBuster(charName);
     }
     else if (charType == 2)
     {
@@ -62,6 +66,16 @@ int main()
     }
     else if (charType == 3)
     {
+    }
+
+    if (moveDown)
+    {
+      cout << "You survived Floor 3." << endl;
+      cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+    }
+    else
+    {
+      return 0;
     }
   }
 
@@ -90,6 +104,7 @@ int main()
   }
 
   delete detective;
+  delete ghostbuster;
 
   return 0;
 }

@@ -220,6 +220,9 @@ https://www.asciiart.eu/people/occupations/knights
 https://ascii.co.uk/art/detective
 https://patorjk.com/software/taag/#p=display&f=3D-ASCII&t=Floor%201
 https://patorjk.com/software/taag/#p=display&f=Slant&t=Great%20Job%2C%20You%20Survived!
+https://www.asciiart.eu/mythology/ghosts
+https://ascii.co.uk/art/goblin
+https://www.asciiart.eu/mythology/monsters
 
 
 */

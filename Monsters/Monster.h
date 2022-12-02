@@ -32,6 +32,7 @@ public:
     }
     virtual string getName() = 0;
     void updateState();
+    virtual void print() = 0;
 
 protected:
     float health;

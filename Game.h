@@ -42,7 +42,8 @@ public:
   {
 
     cout << "Option 1: Ghostbuster" << endl;
-    cout << R"(                       ---                                     
+    cout << R"(                    
+                       ---                                     
                     -        --                             
                 --( /     \ )XXXXXXXXXXXXX                   
             --XXX(   O   O  )XXXXXXXXXXXXXXX-              
@@ -123,6 +124,7 @@ public:
     bool endDuel = false;
     while (!endDuel)
     {
+
       cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << " | Weapon: " << user->getWeapon() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
       cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
       int choice = 0;
@@ -130,14 +132,8 @@ public:
 
       if (choice == 1)
       {
-        cout << R"(      
-  _    _                       _   _             _              
- | |  | |                     | | | |           | |             
- | |  | |___  ___ _ __    __ _| |_| |_ __ _  ___| | _____       
- | |  | / __|/ _ \ '__|  / _` | __| __/ _` |/ __| |/ / __|      
- | |__| \__ \  __/ |    | (_| | |_| || (_| | (__|   <\__ \_ _ _ 
-  \____/|___/\___|_|     \__,_|\__|\__\__,_|\___|_|\_\___(_|_|_)
-        )" << endl;
+
+        user->print();
         enemy->getsHit(user);
 
         cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
@@ -153,6 +149,7 @@ public:
         }
         else
         {
+          user->print();
           cout << R"(      
    _____                 _       _         _   _             _          
   / ____|               (_)     | |       | | | |           | |         
@@ -212,15 +209,7 @@ public:
       if (enter == 'm')
       {
 
-        // Monster attacks
-        cout << R"(
-  __  __                 _                    _   _             _              
- |  \/  |               | |                  | | | |           | |             
- | \  / | ___  _ __  ___| |_ ___ _ __    __ _| |_| |_ __ _  ___| | _____       
- | |\/| |/ _ \| '_ \/ __| __/ _ \ '__|  / _` | __| __/ _` |/ __| |/ / __|      
- | |  | | (_) | | | \__ \ ||  __/ |    | (_| | |_| || (_| | (__|   <\__ \_ _ _ 
- |_|  |_|\___/|_| |_|___/\__\___|_|     \__,_|\__|\__\__,_|\___|_|\_\___(_|_|_)
-        )" << endl;
+        enemy->print();
         user->getsHit(enemy);
       }
 
@@ -266,6 +255,7 @@ public:
       if ((_x == 2) && (_y == 7))
       {
         int d = 0;
+        ghost->print();
         cout << "Ghost encountered! Level:" << ghost->getLvl() << endl;
         cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
         cin >> d;
@@ -297,6 +287,7 @@ public:
       if ((_x == 5) && (_y == 17))
       {
         int d = 0;
+        goblin->print();
         cout << "Goblin encountered! Level:" << goblin->getLvl() << endl;
         cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
         cin >> d;
@@ -408,6 +399,7 @@ public:
       if ((_x == 3) && (_y == 11))
       {
         int d = 0;
+        vampire->print();
         cout << "Vampire encountered! Level:" << vampire->getLvl() << endl;
         cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
         cin >> d;
@@ -439,6 +431,7 @@ public:
       if ((_x == 5) && (_y == 26))
       {
         int d = 0;
+        ghost2->print();
         cout << "Ghost encountered! Level:" << ghost2->getLvl() << endl;
         cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
         cin >> d;
@@ -550,6 +543,7 @@ public:
       if ((_x == 5) && (_y == 10))
       {
         int d = 0;
+        goblin2->print();
         cout << "Goblin encountered! Level:" << goblin2->getLvl() << endl;
         cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
         cin >> d;
@@ -581,6 +575,7 @@ public:
       if ((_x == 6) && (_y == 23))
       {
         int d = 0;
+        vampire2->print();
         cout << "Vampire encountered! Level:" << vampire2->getLvl() << endl;
         cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
         cin >> d;

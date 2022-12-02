@@ -68,6 +68,7 @@ public:
         cout << "Skipped Duel" << endl;
         cout << "Health: " << health << endl;
     }
+    virtual void print() = 0;
 
 protected:
     float health;

@@ -48,6 +48,12 @@ int main()
     {
       // OUTPUTTING CHARACTER ASCII
       int charType = Game::characterOptions();
+      if (charType > 3 || charType < 0)
+      {
+
+        cout << "Invalid input. Try again" << endl;
+        continue;
+      }
 
       char myChar;
 
@@ -132,6 +138,11 @@ int main()
         file_vslayer = new VampireSlayer(charName, health, xp, level);
         selectFloor(floor, myChar, file_vslayer, x, y);
       }
+    }
+    else
+    {
+      cout << "Invalid input. Try again" << endl;
+      continue;
     }
   }
 

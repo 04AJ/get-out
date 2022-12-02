@@ -196,6 +196,11 @@ public:
           continue;
         }
       }
+      else
+      {
+        cout << "Invalid input. Try again" << endl;
+        continue;
+      }
 
       if (enemy->getHealth() <= 0.0)
       {
@@ -204,11 +209,16 @@ public:
       }
 
       char enter;
-      cout << "Enter 'm' to for the monster's attack" << endl;
+      cout << "Enter any character for the monster's attack" << endl;
       cin >> enter;
-      if (enter == 'm')
+      if (enter == ' ')
       {
 
+        enemy->print();
+        user->getsHit(enemy);
+      }
+      else
+      {
         enemy->print();
         user->getsHit(enemy);
       }

@@ -17,6 +17,7 @@ public:
         health = 100.0;
         xp = 0.0;
         specialCount = 3;
+
         cout << "Created new Detective Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
     void levelUp()

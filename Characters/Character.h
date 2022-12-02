@@ -19,6 +19,8 @@ public:
         health = 0.0;
         xp = 0.0;
         level = 1;
+        candyCount = 5;
+        kitCount = 3;
     }
     int getLvl()
     {
@@ -47,14 +49,23 @@ public:
     {
         return bag;
     }
-    void openChest();
     void eatCandy()
     {
-        health += 5;
+        health += 50;
+        candyCount--;
+        cout << "Ate candy... Health raised by 50!" << endl;
+        cout << cCount() << "/5 Candies left" << endl;
+        cout << endl;
+        cout << endl;
     }
     void useHealthKit()
     {
-        health += 10;
+        health += 100;
+        kitCount--;
+        cout << "Used Health Kit... Health raised by 100!" << endl;
+        cout << kCount() << "/3 Health Kits left" << endl;
+        cout << endl;
+        cout << endl;
     }
     void skipDuel()
     {

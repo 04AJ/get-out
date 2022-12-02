@@ -37,12 +37,22 @@ public:
     {
         return type;
     }
+    int cCount()
+    {
+        return candyCount;
+    }
+    int kCount()
+    {
+        return kitCount;
+    }
 
 protected:
     string name;
     string type;
     int level;
     int specialCount;
+    int candyCount;
+    int kitCount;
 };
 
 #endif

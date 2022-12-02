@@ -127,22 +127,6 @@ public:
       int choice = 0;
       cin >> choice;
 
-      if (choice == 2)
-      {
-        if (user->sCount() == 0)
-        {
-          cout << "No more special attacks available" << endl;
-          cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << " | Weapon: " << user->getWeapon() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
-          cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
-          cin >> choice;
-        }
-        else
-        {
-          enemy->getsSpecial(user);
-          user->dropSpecial();
-        }
-      }
-
       if (choice == 1)
       {
         cout << R"(      
@@ -156,6 +140,63 @@ public:
         enemy->getsHit(user);
 
         cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+      }
+      else if (choice == 2)
+      {
+        if (user->sCount() == 0)
+        {
+          cout << "No more special attacks available" << endl;
+          cout << endl;
+          cout << endl;
+          continue;
+        }
+        else
+        {
+          cout << R"(      
+   _____                 _       _         _   _             _          
+  / ____|               (_)     | |       | | | |           | |         
+ | (___  _ __   ___  ___ _  __ _| |   __ _| |_| |_ __ _  ___| | __      
+  \___ \| '_ \ / _ \/ __| |/ _` | |  / _` | __| __/ _` |/ __| |/ /      
+  ____) | |_) |  __/ (__| | (_| | | | (_| | |_| || (_| | (__|   < _ _ _ 
+ |_____/| .__/ \___|\___|_|\__,_|_|  \__,_|\__|\__\__,_|\___|_|\_(_|_|_)
+        | |                                                             
+        |_|                                                             
+          )" << endl;
+          enemy->getsSpecial(user);
+          user->dropSpecial();
+        }
+      }
+
+      else if (choice == 3)
+      {
+        if (user->kCount() > 0)
+        {
+          user->useHealthKit();
+          cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << " | Weapon: " << user->getWeapon() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+        }
+        else
+        {
+          cout << "No more Health Kits available" << endl;
+          cout << endl;
+          cout << endl;
+          continue;
+        }
+      }
+      else if (choice == 4)
+      {
+        if (user->cCount() > 0)
+        {
+          user->eatCandy();
+          cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << " | Weapon: " << user->getWeapon() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+        }
+        else
+        {
+          cout << "No more Candy available" << endl;
+          cout << endl;
+          cout << endl;
+
+          continue;
+        }
       }
 
       if (enemy->getHealth() < 0.0)
@@ -237,6 +278,7 @@ public:
           user->skipDuel();
         }
       }
+
       cin >> input;
     }
 

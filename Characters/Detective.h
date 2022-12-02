@@ -65,7 +65,7 @@ public:
         cout << endl;
         cout << endl;
     }
-
+    // updates users xp and determines if they can level up
     void updateState(float mXP)
     {
         xp += mXP;
@@ -86,7 +86,7 @@ public:
         cout << endl;
         cout << endl;
     }
-
+    // savers user data to new file
     void saveData(int x, int y, int floor)
     {
 

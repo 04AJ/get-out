@@ -62,7 +62,7 @@ public:
         cout << endl;
         cout << endl;
     }
-
+    // updates users xp and determines if they can level up
     void updateState(float mXP)
     {
         xp += mXP;

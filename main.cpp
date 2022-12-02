@@ -25,13 +25,12 @@ void selectFloor(int _floor, char _myChar, Character *user, int _x, int _y);
 int main()
 {
 
-  // NEW CHARACTER POINTERS
-
+  // New Character pointers
   Character *detective = nullptr;
   Character *ghostbuster = nullptr;
   Character *vslayer = nullptr;
 
-  // LOADING FROM FILE POINTERS
+  // Loading from file Character pointers
   Character *file_detective = nullptr;
   Character *file_ghostbuster = nullptr;
   Character *file_vslayer = nullptr;
@@ -40,13 +39,13 @@ int main()
   while (gameLoop)
   {
 
-    // OPENING PAGE
+    // Opening game menu
     int load = Game::openingMenu();
 
-    // Creating new character
+    // If user decides to create new character
     if (load == 1)
     {
-      // OUTPUTTING CHARACTER ASCII
+      // Character ASCII and Character type choice
       int charType = Game::characterOptions();
       if (charType > 3 || charType < 0)
       {
@@ -73,6 +72,8 @@ int main()
       {
         myChar = 'G';
         ghostbuster = new GBuster(charName);
+
+        // puts user in the third floor
         selectFloor(3, myChar, ghostbuster, cX, cY);
       }
       else if (charType == 2)
@@ -124,6 +125,7 @@ int main()
       {
         myChar = 'D';
         file_detective = new Detective(charName, health, xp, level);
+        // puts user in the floor they left off
         selectFloor(floor, myChar, file_detective, x, y);
       }
       else if (charType == "GhostBuster")

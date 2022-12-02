@@ -76,8 +76,7 @@ public:
         }
     }
 
-    // char **map
-    static void userInput(char input, vector<vector<char>> &map, char ch, int &x, int &y)
+       static void userInput(char input, vector<vector<char>> &map, char ch, int &x, int &y)
     {
         switch (input)
         {

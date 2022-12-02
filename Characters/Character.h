@@ -13,6 +13,7 @@ class Character : public Object
 
 public:
     virtual void getsHit(Monster *enemy) = 0;
+    // default constructor
     Character()
     {
         name = "Unknown";

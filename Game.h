@@ -118,7 +118,7 @@ public:
     return charType;
   }
 
-  // creates new menu for fighting and increases or decreases user character xp/level
+  // creates new menu for fighting and increases or decreases user character xp/level. If user dies, game ends
   static bool duel(Character *user, Monster *enemy)
   {
     bool endDuel = false;
@@ -232,6 +232,8 @@ public:
 
     return false;
   }
+
+  // function for user to navigate across floor 3. Returns true if user reaches end of maze, false otherwise
   static bool floor3(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
   {
     cout << endl;
@@ -259,7 +261,6 @@ public:
     while ((input != 'q' && input != 'Q') && ((_x != 10) || (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
-      cout << "x:" << _x << " y:" << _y << endl;
       Floor::printMap(map);
 
       if ((_x == 2) && (_y == 7))
@@ -373,6 +374,7 @@ public:
     }
     return false;
   }
+  // function for user to navigate across floor 2. Returns true if user reaches end of maze, false otherwise
 
   static bool floor2(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
   {
@@ -403,7 +405,6 @@ public:
     while ((input != 'q' && input != 'Q') && ((_x != 10) || (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
-      cout << "x:" << _x << " y:" << _y << endl;
       Floor::printMap(map);
 
       if ((_x == 3) && (_y == 11))
@@ -518,6 +519,7 @@ public:
     return false;
   }
 
+  // function for user to navigate across floor 1. Returns true if user reaches end of maze, false otherwise
   static bool floor1(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
   {
     // resetting character items and specials
@@ -547,7 +549,6 @@ public:
     while ((input != 'q' && input != 'Q') && ((_x != 10) || (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
-      cout << "x:" << _x << " y:" << _y << endl;
       Floor::printMap(map);
 
       if ((_x == 5) && (_y == 10))

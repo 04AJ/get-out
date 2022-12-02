@@ -40,8 +40,8 @@ public:
     {
         level++;
         cout << "YOU LEVELD UP!" << endl;
-        cout << "Level: " << level << "--->  New Weapon: " << weapon << endl;
         weapon = weapons[level - 1];
+        cout << "Level: " << level << "--->  New Weapon: " << weapon << endl;
     }
     string getWeapon()
     {

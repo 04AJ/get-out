@@ -202,7 +202,7 @@ public:
 
       if (enemy->getHealth() <= 0.0)
       {
-        endDuel = true;
+
         return false;
       }
 
@@ -226,7 +226,7 @@ public:
 
       if (user->getHealth() <= 0.0)
       {
-        endDuel = true;
+
         return true;
       }
     }
@@ -235,6 +235,18 @@ public:
   }
   static bool floor3(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
   {
+    cout << endl;
+    cout << R"(
+ ________ ___       ________  ________  ________          ________     
+|\  _____\\  \     |\   __  \|\   __  \|\   __  \        |\_____  \    
+\ \  \__/\ \  \    \ \  \|\  \ \  \|\  \ \  \|\  \       \|____|\ /_   
+ \ \   __\\ \  \    \ \  \\\  \ \  \\\  \ \   _  _\            \|\  \  
+  \ \  \_| \ \  \____\ \  \\\  \ \  \\\  \ \  \\  \|          __\_\  \ 
+   \ \__\   \ \_______\ \_______\ \_______\ \__\\ _\         |\_______\
+    \|__|    \|_______|\|_______|\|_______|\|__|\|__|        \|_______|
+   )" << endl;
+    cout << endl;
+
     // Monster pointers
     Monster *ghost = new Ghost(100.0, 1);
     Monster *goblin = new Goblin(150.0, 2);
@@ -245,7 +257,7 @@ public:
     char input;
     cin >> input;
 
-    while ((input != 'q' && input != 'Q') && ((_x != 10) && (_y != 29)))
+    while ((input != 'q' && input != 'Q') && ((_x != 10) || (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
       cout << "x:" << _x << " y:" << _y << endl;
@@ -266,7 +278,7 @@ public:
           }
           else
           {
-            float gXP = (ghost->getLvl()) * 100;
+            float gXP = (ghost->getLvl()) * 300;
             cout << endl;
             cout << endl;
             cout << "CONGRATULATIONS! You defeated the monster. You gained " << gXP << " xp" << endl;
@@ -282,7 +294,7 @@ public:
           cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
         }
       }
-      if ((_x == 5) && (_y == 16))
+      if ((_x == 5) && (_y == 17))
       {
         int d = 0;
         cout << "Goblin encountered! Level:" << goblin->getLvl() << endl;
@@ -321,7 +333,7 @@ public:
     delete ghost;
     delete goblin;
 
-    if ((_x == 10) || (_y == 29))
+    if ((_x == 10) && (_y == 29))
     {
       cout << "You survived Floor 3." << endl;
       cout << "1. Move down to Floor 2               2. Save your progress and close game" << endl;
@@ -361,22 +373,146 @@ public:
     return false;
   }
 
-  static void test(char symbol, int _x, int _y, vector<vector<char>> map)
+  static bool floor2(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
   {
+    // resetting character items and specials
+    user->reset();
+
+    cout << endl;
+    cout << R"(
+ ________ ___       ________  ________  ________           _______    
+|\  _____\\  \     |\   __  \|\   __  \|\   __  \         /  ___  \    
+\ \  \__/\ \  \    \ \  \|\  \ \  \|\  \ \  \|\  \       /__/|_/  /|  
+ \ \   __\\ \  \    \ \  \\\  \ \  \\\  \ \   _  _\      |__|//  / /  
+  \ \  \_| \ \  \____\ \  \\\  \ \  \\\  \ \  \\  \|         /  /_/__  
+   \ \__\   \ \_______\ \_______\ \_______\ \__\\ _\        |\________\
+    \|__|    \|_______|\|_______|\|_______|\|__|\|__|        \|_______|
+   )" << endl;
+    cout << endl;
+    // Monster pointers
+    Monster *vampire = new Vampire(200.0, 2);
+    Monster *ghost2 = new Ghost(250.0, 3);
+
     map[_x][_y] = symbol;
     Floor::printMap(map);
     cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
     char input;
     cin >> input;
-    while ((input != 'q' && input != 'Q') && ((_x != 10) && (_y != 29)))
+
+    while ((input != 'q' && input != 'Q') && ((_x != 10) || (_y != 29)))
     {
       Floor::userInput(input, map, symbol, _x, _y);
       cout << "x:" << _x << " y:" << _y << endl;
       Floor::printMap(map);
 
+      if ((_x == 3) && (_y == 11))
+      {
+        int d = 0;
+        cout << "Vampire encountered! Level:" << vampire->getLvl() << endl;
+        cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
+        cin >> d;
+        if (d == 1)
+        {
+          if (duel(user, vampire))
+          {
+            cout << "You have died. GAME OVER" << endl;
+            return false;
+          }
+          else
+          {
+            float gXP = (vampire->getLvl()) * 300;
+            cout << endl;
+            cout << endl;
+            cout << "CONGRATULATIONS! You defeated the monster. You gained " << gXP << " xp" << endl;
+            user->updateState(gXP);
+            Floor::printMap(map);
+            cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
+          }
+        }
+        else if (d == 2)
+        {
+          user->skipDuel();
+          Floor::printMap(map);
+          cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
+        }
+      }
+      if ((_x == 5) && (_y == 26))
+      {
+        int d = 0;
+        cout << "Ghost encountered! Level:" << ghost2->getLvl() << endl;
+        cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
+        cin >> d;
+        if (d == 1)
+        {
+          if (duel(user, ghost2))
+          {
+            cout << "You have died. GAME OVER" << endl;
+            return false;
+          }
+          else
+          {
+            float gXP = (ghost2->getLvl()) * 300;
+            cout << endl;
+            cout << endl;
+            cout << "CONGRATULATIONS! You defeated the monster. You gained " << gXP << " xp" << endl;
+            user->updateState(gXP);
+            Floor::printMap(map);
+            cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
+          }
+        }
+        else if (d == 2)
+        {
+          user->skipDuel();
+          Floor::printMap(map);
+          cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
+        }
+      }
+
       cin >> input;
     }
+
+    // deleting pointers
+    delete vampire;
+    delete ghost2;
+
+    if ((_x == 10) && (_y == 29))
+    {
+      cout << "You survived Floor 2." << endl;
+      cout << "1. Move down to Floor 1               2. Save your progress and close game" << endl;
+      int save;
+      cin >> save;
+      if (save == 1)
+      {
+        return true;
+      }
+      else if (save == 2)
+      {
+        cout << "Saving user data for " << user->getName() << endl;
+        user->saveData(_x, _y, 2);
+        exit(1);
+      }
+    }
+    else if (input == 'q' || input == 'Q')
+    {
+      cout << "1. Save user data                      2. Don't save data" << endl;
+      int save;
+      cin >> save;
+      if (save == 1)
+      {
+        cout << "Saving user data for " << user->getName() << endl;
+        user->saveData(_x, _y, 2);
+        exit(1);
+      }
+      else if (save == 2)
+      {
+        exit(1);
+      }
+    }
+    else
+    {
+      return false;
+    }
+    return false;
   }
 };
-
 #endif

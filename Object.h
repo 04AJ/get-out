@@ -21,6 +21,12 @@ public:
     {
         return specialCount;
     }
+    void reset()
+    {
+        specialCount = 3;
+        candyCount = 5;
+        kitCount = 3;
+    }
     void dropSpecial()
     {
         if (specialCount > 0)

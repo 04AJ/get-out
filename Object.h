@@ -45,6 +45,10 @@ public:
     {
         return kitCount;
     }
+    void setLvl(int lvl)
+    {
+        level = lvl;
+    }
 
 protected:
     string name;

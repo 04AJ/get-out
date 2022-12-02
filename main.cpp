@@ -25,10 +25,14 @@ int main()
   vector<vector<char>> maze2 = Floor::create2DArray("mazes/maze2.txt");
   vector<vector<char>> maze1 = Floor::create2DArray("mazes/maze1.txt");
 
-  // CHARACTER POINTER
+  // NEW CHARACTER POINTERS
 
   Character *detective = nullptr;
   Character *ghostbuster = nullptr;
+
+  // LOADING FROM FILE POINTERS
+  Character *file_detective = nullptr;
+  Character *file_ghostbuster = nullptr;
 
   // OPENING PAGE
   int load = Game::openingMenu();
@@ -55,6 +59,16 @@ int main()
     {
       myChar = 'G';
       ghostbuster = new GBuster(charName);
+      moveDown = Game::floor3(maze3, myChar, ghostbuster, cX, cY);
+      if (moveDown)
+      {
+        cout << "You survived Floor 3." << endl;
+        cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+      }
+      else
+      {
+        return 0;
+      }
     }
     else if (charType == 2)
     {
@@ -63,19 +77,18 @@ int main()
       detective = new Detective(charName);
 
       moveDown = Game::floor3(maze3, myChar, detective, cX, cY);
+      if (moveDown)
+      {
+        cout << "You survived Floor 3." << endl;
+        cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+      }
+      else
+      {
+        return 0;
+      }
     }
     else if (charType == 3)
     {
-    }
-
-    if (moveDown)
-    {
-      cout << "You survived Floor 3." << endl;
-      cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
-    }
-    else
-    {
-      return 0;
     }
   }
 
@@ -88,23 +101,72 @@ int main()
     string testName;
     ifstream fin;
     fin.open("users.txt");
+    bool valid = false;
+
+    string charType;
+    float health;
+    float xp;
+    int level;
+    int x;
+    int y;
+    int floor;
+
+    if (!fin.is_open())
+    {
+      cout << "Unable to open file. Returning to menu." << endl;
+    }
     while (getline(fin, testName))
     {
       if (charName == testName)
       {
-        string fileName = "users/" + charName + ".txt";
-        ifstream user(fileName);
-        if (user.is_open())
-        {
-        }
+        valid = true;
       }
     }
-
     fin.close();
+    if (valid)
+    {
+      string fileName = "users/" + charName + ".txt";
+      ifstream user(fileName);
+      if (!user.is_open())
+      {
+        cout << "Unable to open file. Returning to menu." << endl;
+        return 0;
+      }
+
+      user >> charType >> health >> xp >> level >> x >> y >> floor;
+      bool moveDown = false;
+      char myChar;
+      if (charType == "Detective")
+      {
+        myChar = 'D';
+        file_detective = new Detective(charName, health, xp, level);
+        moveDown = Game::floor3(maze3, myChar, file_detective, x, y);
+        if (moveDown)
+        {
+          cout << "You survived Floor 3." << endl;
+          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      else if (charType == "GhostBuster")
+      {
+        file_ghostbuster = new GBuster(charName, health, xp, level);
+      }
+    }
+    else
+    {
+      cout << "User not found. Please try again" << endl;
+      return 0;
+    }
   }
 
   delete detective;
   delete ghostbuster;
+  delete file_detective;
+  delete file_ghostbuster;
 
   return 0;
 }

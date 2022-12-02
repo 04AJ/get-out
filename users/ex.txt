@@ -1,9 +1,7 @@
-2 //level + weapon
-200.0 //health
-50.0 //xp
-gold
-gold
-healthKit
-healthKit
-gold
-gold
+Detective
+250.5
+900.0
+3
+3
+18
+1

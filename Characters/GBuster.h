@@ -17,11 +17,27 @@ public:
         health = 100.0;
         xp = 0.0;
         specialCount = 3;
+        weapon = weapons[level - 1];
+        cout << "Created new GhostBuster Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
+    }
+    GBuster(string n, float h, float x, int l)
+
+    {
+        type = "GhostBuster";
+        name = n;
+        health = h;
+        xp = x;
+        setLvl(l);
+        specialCount = 3;
+        weapon = weapons[level - 1];
         cout << "Created new GhostBuster Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
     void levelUp()
     {
         level++;
+        cout << "YOU LEVELD UP!" << endl;
+        cout << "Level: " << level << "--->  New Weapon: " << weapon << endl;
+        weapon = weapons[level - 1];
     }
     string getWeapon()
     {
@@ -35,10 +51,7 @@ public:
         cout << endl;
         cout << endl;
     }
-    void special()
-    {
-        cout << "using special" << endl;
-    }
+
     void updateState(float mXP)
     {
         xp += mXP;
@@ -64,7 +77,7 @@ public:
 
 private:
     string weapons[6] = {"Ghost Trap", "Slime Blower", "Ghost Grabber", "Ghost Vacuum", "Ghost Tank", "Proton Pack"};
-    string weapon = weapons[level - 1];
+    string weapon;
 };
 
 #endif

@@ -8,6 +8,7 @@ using namespace std;
 
 class Detective : public Character
 {
+
 public:
     Detective(string n)
 
@@ -17,14 +18,29 @@ public:
         health = 100.0;
         xp = 0.0;
         specialCount = 3;
-
+        weapon = weapons[level - 1];
         cout << "Created new Detective Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
+
+    Detective(string n, float h, float x, int l)
+
+    {
+        type = "Detective";
+        name = n;
+        health = h;
+        xp = x;
+        setLvl(l);
+        specialCount = 3;
+        weapon = weapons[level - 1];
+        cout << "Created new Detective Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
+    }
+
     void levelUp()
     {
         level++;
         cout << "YOU LEVELD UP!" << endl;
         cout << "Level: " << level << "--->  New Weapon: " << weapon << endl;
+        weapon = weapons[level - 1];
     }
     string getWeapon()
     {
@@ -37,10 +53,6 @@ public:
         cout << name << " Health:" << health << endl;
         cout << endl;
         cout << endl;
-    }
-    void special()
-    {
-        cout << "using special" << endl;
     }
 
     void updateState(float mXP)
@@ -70,7 +82,7 @@ public:
 
 private:
     string weapons[6] = {"Pistol", "Grenade", "Bayonets", "Machine Gun", "Tank", "Nuke"};
-    string weapon = weapons[level - 1];
+    string weapon;
 };
 
 #endif

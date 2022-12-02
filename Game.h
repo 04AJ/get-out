@@ -199,7 +199,7 @@ public:
         }
       }
 
-      if (enemy->getHealth() < 0.0)
+      if (enemy->getHealth() <= 0.0)
       {
         endDuel = true;
         return false;
@@ -223,7 +223,7 @@ public:
         user->getsHit(enemy);
       }
 
-      if (user->getHealth() < 0.0)
+      if (user->getHealth() <= 0.0)
       {
         endDuel = true;
         return true;

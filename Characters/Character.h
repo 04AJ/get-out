@@ -45,10 +45,6 @@ public:
     void loadData();
     virtual void updateState(float mXP) = 0;
 
-    vector<string> getBag()
-    {
-        return bag;
-    }
     void eatCandy()
     {
         health += 50;
@@ -74,13 +70,9 @@ public:
         cout << "Health: " << health << endl;
     }
 
-    virtual void special() = 0;
-
 protected:
     float health;
     float xp;
-
-    vector<string> bag;
 };
 
 #endif

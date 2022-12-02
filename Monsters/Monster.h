@@ -14,6 +14,7 @@ class Monster : public Object
 {
 public:
     virtual void getsHit(Object *user) = 0;
+    virtual void getsSpecial(Object *user) = 0;
 
     Monster()
     {

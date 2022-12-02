@@ -122,58 +122,67 @@ public:
     bool endDuel = false;
     while (!endDuel)
     {
-      cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+      cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << " | Weapon: " << user->getWeapon() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
       cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
       int choice = 0;
       cin >> choice;
+
+      if (choice == 2)
+      {
+        if (user->sCount() == 0)
+        {
+          cout << "No more special attacks available" << endl;
+          cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << " | Weapon: " << user->getWeapon() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
+          cout << "1. Attack monster    2. Use Special Attack    3. Use Health Kit    4. Eat Candy" << endl;
+          cin >> choice;
+        }
+        else
+        {
+          enemy->getsSpecial(user);
+          user->dropSpecial();
+        }
+      }
+
       if (choice == 1)
       {
-        cout << R"(
-          
+        cout << R"(      
   _    _                       _   _             _              
  | |  | |                     | | | |           | |             
  | |  | |___  ___ _ __    __ _| |_| |_ __ _  ___| | _____       
  | |  | / __|/ _ \ '__|  / _` | __| __/ _` |/ __| |/ / __|      
  | |__| \__ \  __/ |    | (_| | |_| || (_| | (__|   <\__ \_ _ _ 
   \____/|___/\___|_|     \__,_|\__|\__\__,_|\___|_|\_\___(_|_|_)
-                                                                
-                                                                
-
         )" << endl;
         enemy->getsHit(user);
 
         cout << "[" << user->getName() << "(You) | Level: " << user->getLvl() << " | Health: " << user->getHealth() << "] VS [" << enemy->getName() << " | Level: " << enemy->getLvl() << " | Health: " << enemy->getHealth() << "]" << endl;
       }
 
-      if (enemy->getHealth() == 0.0)
+      if (enemy->getHealth() < 0.0)
       {
         endDuel = true;
         return false;
       }
 
       char enter;
-      cout << "Enter 'm' to for the monster's attack";
+      cout << "Enter 'm' to for the monster's attack" << endl;
       cin >> enter;
       if (enter == 'm')
       {
 
         // Monster attacks
         cout << R"(
- 
   __  __                 _                    _   _             _              
  |  \/  |               | |                  | | | |           | |             
  | \  / | ___  _ __  ___| |_ ___ _ __    __ _| |_| |_ __ _  ___| | _____       
  | |\/| |/ _ \| '_ \/ __| __/ _ \ '__|  / _` | __| __/ _` |/ __| |/ / __|      
  | |  | | (_) | | | \__ \ ||  __/ |    | (_| | |_| || (_| | (__|   <\__ \_ _ _ 
  |_|  |_|\___/|_| |_|___/\__\___|_|     \__,_|\__|\__\__,_|\___|_|\_\___(_|_|_)
-                                                                               
-                                                                               
-
         )" << endl;
         user->getsHit(enemy);
       }
 
-      if (user->getHealth() == 0.0)
+      if (user->getHealth() < 0.0)
       {
         endDuel = true;
         return true;
@@ -214,7 +223,11 @@ public:
           }
           else
           {
-            cout << "CONGRADULATIONS! You have defeated the monster. You have gained ___ xp" << endl;
+            float gXP = (ghost->getLvl()) * 100;
+            cout << endl;
+            cout << endl;
+            cout << "CONGRADULATIONS! You have defeated the monster. You have gained " << gXP << " xp" << endl;
+            user->updateState(gXP);
             Floor::printMap(map);
             cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
           }

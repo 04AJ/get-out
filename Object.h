@@ -17,10 +17,32 @@ public:
     {
         return level;
     }
+    int sCount()
+    {
+        return specialCount;
+    }
+    void dropSpecial()
+    {
+        if (specialCount > 0)
+        {
+            specialCount--;
+            cout << specialCount << "/3 Special Remaining" << endl;
+        }
+        else
+        {
+            cout << "0/3 Specials Remaining" << endl;
+        }
+    }
+    string getType()
+    {
+        return type;
+    }
 
 protected:
     string name;
+    string type;
     int level;
+    int specialCount;
 };
 
 #endif

@@ -41,11 +41,8 @@ public:
     virtual string getWeapon() = 0;
     void saveData();
     void loadData();
-    void updateState();
-    virtual void addXp(int xp)
-    {
-        this->xp += xp;
-    }
+    virtual void updateState(float mXP) = 0;
+
     vector<string> getBag()
     {
         return bag;

@@ -41,8 +41,7 @@ public:
     }
 
     virtual string getWeapon() = 0;
-    void saveData();
-    void loadData();
+    virtual void saveData(int x, int y, int floor) = 0;
     virtual void updateState(float mXP) = 0;
 
     void eatCandy()

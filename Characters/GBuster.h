@@ -18,7 +18,7 @@ public:
         xp = 0.0;
         specialCount = 3;
         weapon = weapons[level - 1];
-        cout << "Created new GhostBuster Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
+        cout << "Created new GhostBuster Character " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
     GBuster(string n, float h, float x, int l)
 
@@ -30,7 +30,7 @@ public:
         setLvl(l);
         specialCount = 3;
         weapon = weapons[level - 1];
-        cout << "Created new GhostBuster Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
+        cout << "Loaded GhostBuster Character " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
     void levelUp()
     {
@@ -69,6 +69,22 @@ public:
             levelUp();
 
         cout << "Total XP: " << xp << endl;
+    }
+
+    void saveData(int x, int y, int floor)
+    {
+        string fileName = "users/" + name + ".txt";
+        ofstream fout;
+        fout.open(fileName);
+        fout << type << endl;
+        fout << health << endl;
+        fout << xp << endl;
+        fout << level << endl;
+        fout << x << endl;
+        fout << y << endl;
+        fout << floor << endl;
+
+        fout.close();
     }
     ~GBuster()
     {

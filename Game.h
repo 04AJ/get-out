@@ -1,6 +1,5 @@
 #ifndef GAME_H
 #define GAME_H
-#include <iostream>
 
 #include "Object.h"
 #include "Characters/Character.h"
@@ -11,6 +10,8 @@
 #include "Monsters/Ghost.h"
 
 #include "Floor.h"
+#include <iostream>
+#include <fstream>
 using namespace std;
 
 class Game
@@ -276,6 +277,8 @@ public:
         else if (d == 2)
         {
           user->skipDuel();
+          Floor::printMap(map);
+          cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
         }
       }
 
@@ -287,12 +290,42 @@ public:
 
     if ((_x == 10) || (_y == 29))
     {
-      return true;
+      cout << "You survived Floor 3." << endl;
+      cout << "1. Move down to Floor 2               2. Save your progress and close game" << endl;
+      int save;
+      cin >> save;
+      if (save == 1)
+      {
+        return true;
+      }
+      else if (save == 2)
+      {
+        cout << "Saving user data for " << user->getName() << endl;
+        user->saveData(_x, _y, 3);
+        exit(1);
+      }
+    }
+    else if (input == 'q' || input == 'Q')
+    {
+      cout << "1. Save user data                      2. Don't save data" << endl;
+      int save;
+      cin >> save;
+      if (save == 1)
+      {
+        cout << "Saving user data for " << user->getName() << endl;
+        user->saveData(_x, _y, 3);
+        exit(1);
+      }
+      else if (save == 2)
+      {
+        exit(1);
+      }
     }
     else
     {
       return false;
     }
+    return false;
   }
 
   static void test(char symbol, int _x, int _y, vector<vector<char>> map)

@@ -2,6 +2,7 @@
 #define DETECTIVE_H
 
 #include <iostream>
+#include <fstream>
 #include "Character.h"
 
 using namespace std;
@@ -19,7 +20,7 @@ public:
         xp = 0.0;
         specialCount = 3;
         weapon = weapons[level - 1];
-        cout << "Created new Detective Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
+        cout << "Created new Detective Character " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
 
     Detective(string n, float h, float x, int l)
@@ -32,7 +33,7 @@ public:
         setLvl(l);
         specialCount = 3;
         weapon = weapons[level - 1];
-        cout << "Created new Detective Character: " << name << " with health: " << health << " and weapon: " << weapon << endl;
+        cout << "Loaded Detective Character " << name << " with health: " << health << " and weapon: " << weapon << endl;
     }
 
     void levelUp()
@@ -74,6 +75,23 @@ public:
         cout << "Total XP: " << xp << endl;
         cout << endl;
         cout << endl;
+    }
+
+    void saveData(int x, int y, int floor)
+    {
+
+        string fileName = "users/" + name + ".txt";
+        ofstream fout;
+        fout.open(fileName);
+        fout << type << endl;
+        fout << health << endl;
+        fout << xp << endl;
+        fout << level << endl;
+        fout << x << endl;
+        fout << y << endl;
+        fout << floor << endl;
+
+        fout.close();
     }
     ~Detective()
     {

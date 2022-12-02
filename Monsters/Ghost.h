@@ -10,8 +10,7 @@ public:
     {
         health = h;
         level = l;
-        cout << "Created Ghost obj" << endl;
-    }
+        }
 
     void getsHit(Object *user)
     {

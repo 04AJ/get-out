@@ -34,103 +34,91 @@ int main()
   Character *file_detective = nullptr;
   Character *file_ghostbuster = nullptr;
 
-  // OPENING PAGE
-  int load = Game::openingMenu();
-
-  // Creating new character
-  if (load == 1)
+  bool gameLoop = true;
+  while (gameLoop)
   {
-    // OUTPUTTING CHARACTER ASCII
-    int charType = Game::characterOptions();
 
-    char myChar;
+    // OPENING PAGE
+    int load = Game::openingMenu();
 
-    int cX = 0;
-    int cY = 2;
-
-    cout
-        << "Name your character (one word, all lowercase): " << endl;
-    string charName;
-    cin >> charName;
-
-    bool moveDown = false;
-
-    if (charType == 1)
+    // Creating new character
+    if (load == 1)
     {
-      myChar = 'G';
-      ghostbuster = new GBuster(charName);
-      moveDown = Game::floor3(maze3, myChar, ghostbuster, cX, cY);
-      if (moveDown)
+      // OUTPUTTING CHARACTER ASCII
+      int charType = Game::characterOptions();
+
+      char myChar;
+
+      int cX = 0;
+      int cY = 2;
+
+      cout
+          << "Name your character (one word, all lowercase): " << endl;
+      string charName;
+      cin >> charName;
+
+      bool moveDown = false;
+
+      if (charType == 1)
       {
-        cout << "You survived Floor 3." << endl;
-        cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        myChar = 'G';
+        ghostbuster = new GBuster(charName);
+        moveDown = Game::floor3(maze3, myChar, ghostbuster, cX, cY);
+        if (moveDown)
+        {
+          cout << "You survived Floor 3." << endl;
+          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        }
+        else
+        {
+          return 0;
+        }
       }
-      else
+      else if (charType == 2)
       {
-        return 0;
+
+        myChar = 'D';
+        detective = new Detective(charName);
+
+        moveDown = Game::floor3(maze3, myChar, detective, cX, cY);
+        if (moveDown)
+        {
+          cout << "You survived Floor 3." << endl;
+          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        }
+        else
+        {
+          return 0;
+        }
       }
-    }
-    else if (charType == 2)
-    {
-
-      myChar = 'D';
-      detective = new Detective(charName);
-
-      moveDown = Game::floor3(maze3, myChar, detective, cX, cY);
-      if (moveDown)
+      else if (charType == 3)
       {
-        cout << "You survived Floor 3." << endl;
-        cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
-      }
-      else
-      {
-        return 0;
-      }
-    }
-    else if (charType == 3)
-    {
-    }
-  }
-
-  // Loading from file
-  else if (load == 2)
-  {
-    string charName;
-    cout << "Enter the name of your character (one word, all lowercase)" << endl;
-    cin >> charName;
-    string testName;
-    ifstream fin;
-    fin.open("users.txt");
-    bool valid = false;
-
-    string charType;
-    float health;
-    float xp;
-    int level;
-    int x;
-    int y;
-    int floor;
-
-    if (!fin.is_open())
-    {
-      cout << "Unable to open file. Returning to menu." << endl;
-    }
-    while (getline(fin, testName))
-    {
-      if (charName == testName)
-      {
-        valid = true;
       }
     }
-    fin.close();
-    if (valid)
+
+    // Loading from file
+    else if (load == 2)
     {
+      string charName;
+      cout << "Enter the name of your character (one word, all lowercase)" << endl;
+      cin >> charName;
+
+      string charType;
+      float health;
+      float xp;
+      int level;
+      int x;
+      int y;
+      int floor;
+
       string fileName = "users/" + charName + ".txt";
       ifstream user(fileName);
       if (!user.is_open())
       {
-        cout << "Unable to open file. Returning to menu." << endl;
-        return 0;
+        cout << "User not found. Returning to menu." << endl;
+        cout << endl;
+        cout << endl;
+        continue;
       }
 
       user >> charType >> health >> xp >> level >> x >> y >> floor;
@@ -143,8 +131,6 @@ int main()
         moveDown = Game::floor3(maze3, myChar, file_detective, x, y);
         if (moveDown)
         {
-          cout << "You survived Floor 3." << endl;
-          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
         }
         else
         {
@@ -153,13 +139,19 @@ int main()
       }
       else if (charType == "GhostBuster")
       {
+        myChar = 'G';
         file_ghostbuster = new GBuster(charName, health, xp, level);
+        moveDown = Game::floor3(maze3, myChar, file_ghostbuster, x, y);
+        if (moveDown)
+        {
+          cout << "You survived Floor 3." << endl;
+          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        }
+        else
+        {
+          return 0;
+        }
       }
-    }
-    else
-    {
-      cout << "User not found. Please try again" << endl;
-      return 0;
     }
   }
 

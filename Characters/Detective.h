@@ -49,8 +49,18 @@ public:
     }
     void getsHit(Monster *enemy)
     {
-        health -= (10 * enemy->getLvl());
+        string mName = enemy->getName();
         cout << enemy->getName() << " attacked " << name << endl;
+        if (mName == "Goblin")
+        {
+            health -= (8 * enemy->getLvl());
+            cout << "Goblin attack is weak against Detectives" << endl;
+        }
+        else
+        {
+            health -= (10 * enemy->getLvl());
+        }
+
         cout << name << " Health:" << health << endl;
         cout << endl;
         cout << endl;

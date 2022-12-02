@@ -10,11 +10,11 @@ public:
     {
         health = h;
         level = l;
-        }
+    }
 
     void getsHit(Object *user)
     {
-        health -= (20 * user->getLvl());
+        health -= (10 * user->getLvl());
         cout << user->getName() << " attacked " << name << endl;
         cout << name << " Health:" << health << endl;
         cout << endl;

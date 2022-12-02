@@ -6,6 +6,8 @@
 
 #include "Monsters/Monster.h"
 #include "Monsters/Ghost.h"
+#include "Monsters/Goblin.h"
+#include "Monsters/Vampire.h"
 
 #include "Floor.h"
 #include <iostream>
@@ -233,8 +235,9 @@ public:
   }
   static bool floor3(vector<vector<char>> map, char symbol, Character *user, int _x, int _y)
   {
-    // creating Ghost monster
+    // Monster pointers
     Monster *ghost = new Ghost(100.0, 1);
+    Monster *goblin = new Goblin(150.0, 2);
 
     map[_x][_y] = symbol;
     Floor::printMap(map);
@@ -266,7 +269,38 @@ public:
             float gXP = (ghost->getLvl()) * 100;
             cout << endl;
             cout << endl;
-            cout << "CONGRADULATIONS! You have defeated the monster. You have gained " << gXP << " xp" << endl;
+            cout << "CONGRATULATIONS! You defeated the monster. You gained " << gXP << " xp" << endl;
+            user->updateState(gXP);
+            Floor::printMap(map);
+            cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
+          }
+        }
+        else if (d == 2)
+        {
+          user->skipDuel();
+          Floor::printMap(map);
+          cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
+        }
+      }
+      if ((_x == 5) && (_y == 16))
+      {
+        int d = 0;
+        cout << "Goblin encountered! Level:" << goblin->getLvl() << endl;
+        cout << "1. Duel Monster for the chance to earn xp!        2. No Duel (loose half your health)" << endl;
+        cin >> d;
+        if (d == 1)
+        {
+          if (duel(user, goblin))
+          {
+            cout << "You have died. GAME OVER" << endl;
+            return false;
+          }
+          else
+          {
+            float gXP = (goblin->getLvl()) * 300;
+            cout << endl;
+            cout << endl;
+            cout << "CONGRATULATIONS! You defeated the monster. You gained " << gXP << " xp" << endl;
             user->updateState(gXP);
             Floor::printMap(map);
             cout << "Type w a s d and click enter to move your character, type 'q' and click enter to quit" << endl;
@@ -283,8 +317,9 @@ public:
       cin >> input;
     }
 
-    // deleting ghost
+    // deleting pointers
     delete ghost;
+    delete goblin;
 
     if ((_x == 10) || (_y == 29))
     {

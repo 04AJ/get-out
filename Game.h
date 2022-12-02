@@ -3,8 +3,6 @@
 
 #include "Object.h"
 #include "Characters/Character.h"
-#include "Characters/Detective.h"
-// #include "Characters/GBuster.h"
 
 #include "Monsters/Monster.h"
 #include "Monsters/Ghost.h"

@@ -2,8 +2,9 @@
 #define GBUSTER_H
 
 #include <iostream>
-#include "Character.h"
 
+#include "Character.h"
+#include <fstream>
 using namespace std;
 
 class GBuster : public Character
@@ -69,6 +70,8 @@ public:
             levelUp();
 
         cout << "Total XP: " << xp << endl;
+        cout << endl;
+        cout << endl;
     }
 
     void saveData(int x, int y, int floor)

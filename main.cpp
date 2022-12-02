@@ -5,6 +5,7 @@
 
 #include "Characters/Detective.h"
 #include "Characters/GBuster.h"
+#include "Characters/VampireSlayer.h"
 #include "Characters/Character.h"
 #include "Monsters/Monster.h"
 #include "Monsters/Ghost.h"
@@ -29,10 +30,12 @@ int main()
 
   Character *detective = nullptr;
   Character *ghostbuster = nullptr;
+  Character *vslayer = nullptr;
 
   // LOADING FROM FILE POINTERS
   Character *file_detective = nullptr;
   Character *file_ghostbuster = nullptr;
+  Character *file_vslayer = nullptr;
 
   bool gameLoop = true;
   while (gameLoop)
@@ -93,6 +96,18 @@ int main()
       }
       else if (charType == 3)
       {
+        myChar = 'V';
+        vslayer = new VampireSlayer(charName);
+        moveDown = Game::floor3(maze3, myChar, vslayer, cX, cY);
+        if (moveDown)
+        {
+          cout << "You survived Floor 3." << endl;
+          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        }
+        else
+        {
+          return 0;
+        }
       }
     }
 
@@ -144,8 +159,19 @@ int main()
         moveDown = Game::floor3(maze3, myChar, file_ghostbuster, x, y);
         if (moveDown)
         {
-          cout << "You survived Floor 3." << endl;
-          cout << "1. To move down to Floor 2               2. To save your progress and close game" << endl;
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      else if (charType == "VampireSlayer")
+      {
+        myChar = 'V';
+        file_vslayer = new VampireSlayer(charName, health, xp, level);
+        moveDown = Game::floor3(maze3, myChar, file_vslayer, x, y);
+        if (moveDown)
+        {
         }
         else
         {
@@ -157,8 +183,10 @@ int main()
 
   delete detective;
   delete ghostbuster;
+  delete vslayer;
   delete file_detective;
   delete file_ghostbuster;
+  delete file_vslayer;
 
   return 0;
 }

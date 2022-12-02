@@ -157,6 +157,15 @@ void selectFloor(int _floor, char _myChar, Character *user, int _x, int _y)
       moveDown2 = Game::floor2(maze2, _myChar, user, 0, 2);
       if (moveDown2)
       {
+        moveDown1 = Game::floor1(maze1, _myChar, user, 0, 2);
+        if (moveDown1)
+        {
+          exit(1);
+        }
+        else
+        {
+          exit(1);
+        }
       }
       else
       {
@@ -173,6 +182,27 @@ void selectFloor(int _floor, char _myChar, Character *user, int _x, int _y)
     moveDown2 = Game::floor2(maze2, _myChar, user, _x, _y);
     if (moveDown2)
     {
+      moveDown1 = Game::floor1(maze1, _myChar, user, 0, 2);
+      if (moveDown1)
+      {
+        exit(1);
+      }
+      else
+      {
+        exit(1);
+      }
+    }
+    else
+    {
+      exit(1);
+    }
+  }
+  if (_floor == 1)
+  {
+    moveDown1 = Game::floor1(maze1, _myChar, user, _x, _y);
+    if (moveDown1)
+    {
+      exit(1);
     }
     else
     {
@@ -188,6 +218,8 @@ https://www.asciiart.eu/movies/ghostbusters
 https://patorjk.com/software/taag/#p=display&h=0&v=0&f=Ghost&t=Get%20Out
 https://www.asciiart.eu/people/occupations/knights
 https://ascii.co.uk/art/detective
+https://patorjk.com/software/taag/#p=display&f=3D-ASCII&t=Floor%201
+https://patorjk.com/software/taag/#p=display&f=Slant&t=Great%20Job%2C%20You%20Survived!
 
 
 */
